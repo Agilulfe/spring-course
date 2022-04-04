@@ -8,8 +8,13 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Define your beans here -->
+    <bean id="myLoggerConfig" class="com.agilulfe.spring_course.MyLoggerConfig" init-method="initLogger">
+        <property name="rootLoggerLevel" value="FINE"/>
+        <property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+
     <bean id="myCoach"
-        class="com.agilulfe.spring_course.BaseballCoach">
+        class="com.agilulfe.spring_course.FootballCoach">
     </bean>
     
 </beans>
