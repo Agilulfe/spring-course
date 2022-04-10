@@ -7,14 +7,30 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- Load property file -->
+    <context:property-placeholder location="classpath:sport.properties"/>
+
     <!-- Define your beans here -->
     <bean id="myLoggerConfig" class="com.agilulfe.spring_course.MyLoggerConfig" init-method="initLogger">
         <property name="rootLoggerLevel" value="FINE"/>
         <property name="printedLoggerLevel" value="FINE"/>
     </bean>
 
+    <bean id="myFortuneService" class="com.agilulfe.spring_course.HappyFortuneService">
+    </bean>
+
     <bean id="myCoach"
-        class="com.agilulfe.spring_course.FootballCoach">
+        class="com.agilulfe.spring_course.TrackCoach">
+        <!-- Constructor injector (the ref is the argument we pass to the constructor) -->
+        <constructor-arg ref="myFortuneService"/>
+    </bean>
+
+    <bean id="myCricketCoach" class="com.agilulfe.spring_course.CricketCoach">
+        <!-- Setter injector. name is the variable we are going to set. ref is the argument for setter method -->
+        <property name="fortuneService" ref="myFortuneService"/>
+        <!-- Inject literal values or from property files-->
+        <property name="emailAddress" value="${foo.email}"/>
+        <property name="team" value="${foo.team}"/>
     </bean>
     
 </beans>
